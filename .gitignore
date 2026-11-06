@@ -1,0 +1,6 @@
+inc/config.local.php
+storage/*
+!storage/.htaccess
+!storage/.gitkeep
+.DS_Store
+__pycache__/

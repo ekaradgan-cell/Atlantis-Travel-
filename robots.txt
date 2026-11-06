@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /form.php
+Disallow: /tesekkurler
+Disallow: /en/thank-you
+
+Sitemap: https://atlantistravel.com.tr/sitemap.xml
