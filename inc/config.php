@@ -12,7 +12,7 @@ $config = [
 
     // Gönderen adres. Sunucunun kendi alan adında bir adres olmalı.
     // Boş bırakılırsa noreply@<site alan adı> kullanılır.
-    'from_email' => '',
+    'from_email' => 'emrah@atlantistravel.com.tr',
     'from_name'  => 'Atlantis Travel Web Sitesi',
 
     // 'mail'  : PHP mail() (Hostinger'da ek ayar gerektirmez)
