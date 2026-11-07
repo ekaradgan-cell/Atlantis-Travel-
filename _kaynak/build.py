@@ -19,7 +19,7 @@ WA = "905073978794"
 EMAIL = "info@atlantistraveltr.com"
 INSTAGRAM = "https://www.instagram.com/atlantis.traveltr"
 FACEBOOK = "https://www.facebook.com/atlantis.traveltr"
-VERSION = "20261106"
+VERSION = "20261107"
 
 e = html.escape
 
@@ -39,6 +39,16 @@ ICONS = {
     "pin": '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
     "menu": '<path d="M4 7h16M4 12h16M4 17h16"/>',
     "ig": '<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".6"/>',
+    "steth": '<path d="M6 3v6a4 4 0 0 0 8 0V3M6 3H4.5M14 3h1.5M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/>',
+    "globe": '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.5 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.5-3.5-8.5s1-5.9 3.5-8.5z"/>',
+    "building": '<rect x="5" y="3.5" width="14" height="17" rx="1"/><path d="M9 7.5h2M13 7.5h2M9 11h2M13 11h2M9 14.5h2M13 14.5h2M10.5 20.5v-3h3v3"/>',
+    "briefcase": '<rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V5.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5.5v2M3.5 13h17"/>',
+    "clock": '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+    "tag": '<path d="M3.5 12.5V4.5h8l9 9-8 8z"/><circle cx="8" cy="9" r="1.3"/>',
+    "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    "star": '<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z"/>',
+    "chev": '<path d="M6 9l6 6 6-6"/>',
+    "fb": '<path d="M14.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.3H9v3h2.5V21"/>',
     "handshake": '<path d="M2.5 11l4-4 3 1.5L12 7l3 1.5 3-1.5 3.5 4M6.5 13.5l3 3c.6.6 1.5.6 2 0l1-1M12 15l1.5 1.5c.6.6 1.5.6 2 0l3-3"/>',
 }
 
@@ -79,6 +89,7 @@ PAGES = {
     "privacy": ("/privacy", "/en/privacy"),
     "terms": ("/terms", "/en/terms"),
     "thanks": ("/tesekkurler", "/en/thank-you"),
+    "referans": ("/referanslar", "/en/references"),
 }
 NOINDEX = {"thanks"}
 
@@ -96,9 +107,12 @@ def out_file(path):
 UI = {
     "tr": {
         "skip": "İçeriğe geç", "menu": "Menü", "quote": "Teklif Al", "support": "7/24 operasyon desteği · İstanbul",
-        "nav": [("konaklama", "Kurumsal Konaklama"), ("transfer", "VIP Transfer"), ("saglik", "Sağlık Turizmi"),
-                ("fuar", "Fuar Konaklama"), ("cozumler", "Kurumsal Çözümler"), ("about", "Hakkımızda"),
+        "nav": [("home", "Ana Sayfa"), ("about", "Hakkımızda"), ("cozumler", "Hizmetlerimiz"),
+                ("konaklama", "Kurumsal Konaklama"), ("fuar", "Fuar Konaklama"), ("referans", "Referanslar"),
                 ("contact", "İletişim")],
+        "svc": [("konaklama", "Kurumsal Konaklama"), ("transfer", "VIP Transfer"), ("saglik", "Sağlık Turizmi"),
+                ("fuar", "Fuar Konaklama"), ("cozumler", "Tüm Hizmetler")],
+        "online": "7/24 Online", "bar_t": "Hemen Teklif Alın", "bar_s": "Profesyonel konaklama ve seyahat çözümleri",
         "f_services": "Hizmetler", "f_company": "Kurumsal", "f_contact": "İletişim",
         "f_about": "İstanbul'da şirketler, sağlık kuruluşları ve gruplar için otel konaklama, VIP havalimanı transferi ve operasyon yönetimi.",
         "f_note": "Uçak bileti, vize ve yurt dışı otel rezervasyonu hizmeti verilmemektedir.",
@@ -109,9 +123,12 @@ UI = {
     },
     "en": {
         "skip": "Skip to content", "menu": "Menu", "quote": "Get a Quote", "support": "24/7 operations support · Istanbul",
-        "nav": [("konaklama", "Corporate Accommodation"), ("transfer", "VIP Transfer"), ("saglik", "Medical Tourism"),
-                ("fuar", "Trade Fair Stays"), ("cozumler", "Corporate Solutions"), ("about", "About"),
+        "nav": [("home", "Home"), ("about", "About"), ("cozumler", "Services"),
+                ("konaklama", "Corporate Stays"), ("fuar", "Trade Fair Stays"), ("referans", "References"),
                 ("contact", "Contact")],
+        "svc": [("konaklama", "Corporate Accommodation"), ("transfer", "VIP Transfer"), ("saglik", "Medical Tourism"),
+                ("fuar", "Trade Fair Stays"), ("cozumler", "All Services")],
+        "online": "24/7 Online", "bar_t": "Get a Quote Now", "bar_s": "Professional accommodation and travel solutions",
         "f_services": "Services", "f_company": "Company", "f_contact": "Contact",
         "f_about": "Hotel accommodation, VIP airport transfers and operations management in Istanbul for companies, healthcare providers and groups.",
         "f_note": "We do not provide flight ticketing, visa services or hotel bookings abroad.",
@@ -152,13 +169,14 @@ def head(lang, key, title, desc, schema=None):
 <meta property="og:image" content="{SITE}/assets/img/og-image.jpg">
 <meta property="og:locale" content="{og_locale}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0A1A2F">
+<meta name="theme-color" content="#F7F5F0">
 <meta name="google-site-verification" content="JcOyTdAoY7mSeTs01vLE8-iCf59M3JGKTG3oztYii7o">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" as="image" href="/assets/img/hero-lobby.webp" type="image/webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v={VERSION}">
 <script src="/assets/js/site.js?v={VERSION}" defer></script>
 {ld}</head>
@@ -167,27 +185,23 @@ def head(lang, key, title, desc, schema=None):
 
 def header(lang, key):
     u = UI[lang]
-    other = "en" if lang == "tr" else "tr"
     items = ""
     for k, label in u["nav"]:
         cur = ' aria-current="page"' if k == key else ""
         items += f'<li><a href="{url(k, lang)}"{cur}>{e(label)}</a></li>'
-    items += f'<li><a class="btn btn-gold" href="{url("teklif", lang)}">{u["quote"]}</a></li>'
     if key not in PAGES:
         key = "home"
     tr_cur = ' aria-current="true"' if lang == "tr" else ""
     en_cur = ' aria-current="true"' if lang == "en" else ""
+    items += (f'<li class="extra"><a class="online" href="https://wa.me/{WA}" target="_blank" rel="noopener">'
+              f'<span class="dot"></span>{u["online"]}</a></li>'
+              f'<li class="extra lang"><a href="{url(key, "tr")}" hreflang="tr" lang="tr"{tr_cur}>TR</a>'
+              f'<a href="{url(key, "en")}" hreflang="en" lang="en"{en_cur}>EN</a></li>')
     return f"""<body>
 <a class="skip" href="#icerik">{u["skip"]}</a>
-<div class="topbar"><div class="wrap">
-<span>{u["support"]}</span>
-<span class="links"><a href="mailto:{EMAIL}">{EMAIL}</a><a href="tel:{PHONE1_RAW}">{PHONE1}</a>
-<span class="lang"><a href="{url(key, "tr")}" hreflang="tr" lang="tr"{tr_cur}>TR</a> · <a href="{url(key, "en")}" hreflang="en" lang="en"{en_cur}>EN</a></span></span>
-</div></div>
 <header class="site-header"><div class="wrap nav">
 <a class="brand" href="{url("home", lang)}" aria-label="Atlantis Travel – {u["home"]}">
-<img src="/assets/img/amblem.webp" width="52" height="52" alt="Atlantis Travel logosu">
-<span>ATLANTIS TRAVEL</span></a>
+<img src="/assets/img/logo-horizontal.png" width="727" height="229" alt="Atlantis Travel"></a>
 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="{u["menu"]}">{icon("menu")}</button>
 <nav aria-label="{u["menu"]}"><ul class="menu" id="menu">{items}</ul></nav>
 </div></header>
@@ -197,41 +211,41 @@ def header(lang, key):
 
 def footer(lang):
     u = UI[lang]
-    svc = "".join(f'<li><a href="{url(k, lang)}">{e(l)}</a></li>' for k, l in u["nav"][:5])
-    company = [("about", u["nav"][5][1]), ("sss", "SSS" if lang == "tr" else "FAQ"),
-               ("privacy", "Gizlilik ve KVKK" if lang == "tr" else "Privacy"),
-               ("terms", "Kullanım Şartları" if lang == "tr" else "Terms of Use")]
+    T = lang == "tr"
+    svc = "".join(f'<li><a href="{url(k, lang)}">{e(l)}</a></li>' for k, l in u["svc"])
+    company = [("about", "Hakkımızda" if T else "About"), ("referans", "Referanslar" if T else "References"),
+               ("sss", "SSS" if T else "FAQ"), ("contact", "İletişim" if T else "Contact")]
     comp = "".join(f'<li><a href="{url(k, lang)}">{e(l)}</a></li>' for k, l in company)
-    comp += f'<li><a href="#" data-cookie-settings>{u["cookies"]}</a></li>'
+    legal = [("privacy", "Gizlilik Politikası" if T else "Privacy Policy"), ("terms", "Kullanım Şartları" if T else "Terms of Use")]
+    leg = "".join(f'<li><a href="{url(k, lang)}">{e(l)}</a></li>' for k, l in legal)
+    leg += f'<li><a href="#" data-cookie-settings>{u["cookies"]}</a></li>'
     return f"""</main>
 <footer class="site-footer">
 <div class="wrap cols">
 <div class="brand-col">
-<img src="/assets/img/amblem.webp" width="72" height="72" alt="" loading="lazy">
-<p class="wordmark">ATLANTIS TRAVEL</p>
+<img src="/assets/img/logo-horizontal.png" width="727" height="229" alt="Atlantis Travel" loading="lazy">
 <p>{u["f_about"]}</p>
+<div class="social"><a href="{INSTAGRAM}" rel="noopener" target="_blank" aria-label="Instagram">{icon("ig")}</a><a href="{FACEBOOK}" rel="noopener" target="_blank" aria-label="Facebook">{icon("fb")}</a></div>
 </div>
 <div><h2>{u["f_services"]}</h2><ul>{svc}</ul></div>
 <div><h2>{u["f_company"]}</h2><ul>{comp}</ul></div>
+<div><h2>{"Yasal" if T else "Legal"}</h2><ul>{leg}</ul></div>
 <div><h2>{u["f_contact"]}</h2><ul>
-<li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
 <li><a href="tel:{PHONE1_RAW}">{PHONE1}</a> (WhatsApp)</li>
 <li><a href="tel:{PHONE2_RAW}">{PHONE2}</a></li>
-<li><a href="{INSTAGRAM}" rel="noopener" target="_blank">Instagram</a> · <a href="{FACEBOOK}" rel="noopener" target="_blank">Facebook</a></li>
+<li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
 </ul></div>
 </div>
 <div class="wrap legal"><span>© <span data-year>2026</span> Atlantis Travel. {u["rights"]}</span><span>{u["f_note"]}</span></div>
 </footer>
-<a class="float-wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="{u["wa_label"]}">{icon("wa")}</a>
-<div class="mobile-bar">
-<a class="call" href="tel:{PHONE1_RAW}">{u["call"]}</a>
-<a class="wa" href="https://wa.me/{WA}" target="_blank" rel="noopener">{u["wa"]}</a>
-<a class="quote" href="{url("teklif", lang)}">{u["quote"]}</a>
-</div>
+<div class="float-btns"><a class="fb-call" href="tel:{PHONE1_RAW}" aria-label="{u["call"]}">{icon("phone")}</a>
+<a class="fb-wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="{u["wa_label"]}">{icon("wa")}</a></div>
+<div class="cta-bar"><div class="wrap"><div class="txt"><strong>{u["bar_t"]}</strong><span>{u["bar_s"]}</span></div>
+<div class="acts"><a class="q" href="{url("teklif", lang)}">{icon("mail")}{u["quote"]}</a><a class="c" href="tel:{PHONE1_RAW}">{icon("phone")}{u["call"]}</a></div></div></div>
 <div class="cookie" role="dialog" aria-label="{u["cookies"]}">
 <p>{u["cookie_text"]} <a href="{url("privacy", lang)}">{u["cookie_link"]}</a>.</p>
-<div class="row"><button class="btn btn-navy" type="button" data-consent="all">{u["accept"]}</button>
-<button class="btn btn-line" style="color:var(--navy-700);border-color:var(--navy-700)" type="button" data-consent="essential">{u["reject"]}</button></div>
+<div class="row"><button class="btn btn-gold" type="button" data-consent="all">{u["accept"]}</button>
+<button class="btn btn-ghost" type="button" data-consent="essential">{u["reject"]}</button></div>
 </div>
 </body>
 </html>
@@ -244,7 +258,7 @@ def page_hero(lang, eyebrow, h1, lead, crumb_label, actions=True):
     acts = ""
     if actions:
         acts = (f'<div class="actions"><a class="btn btn-gold" href="{url("teklif", lang)}">{u["quote"]}</a>'
-                f'<a class="btn btn-line" href="https://wa.me/{WA}" target="_blank" rel="noopener">{icon("wa")}{u["wa"]}</a></div>')
+                f'<a class="btn btn-outline" href="https://wa.me/{WA}" target="_blank" rel="noopener">{icon("wa")}{u["wa"]}</a></div>')
     return f"""<section class="page-hero on-navy"><div class="wrap">
 <nav class="crumbs" aria-label="breadcrumb"><a href="{url("home", lang)}">{u["home"]}</a> / {e(crumb_label)}</nav>
 <p class="eyebrow">{e(eyebrow)}</p>
@@ -384,7 +398,7 @@ def qform(lang, ftype="teklif"):
 <div class="hp" aria-hidden="true"><label for="{p}-website">{L["hp"]}</label><input id="{p}-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
 {f}
 <label class="consent full"><input type="checkbox" name="kvkk" value="1" required><span>{L["consent"]} <span class="req">*</span></span></label>
-<div class="form-actions full"><button class="btn btn-navy" type="submit">{send}</button>
+<div class="form-actions full"><button class="btn btn-gold" type="submit">{send}</button>
 <button class="btn btn-wa" type="button" data-wa-send>{icon("wa")}{L["wa"]}</button></div>
 <p class="full" style="font-size:.85rem;color:var(--muted)">{L["note"]}</p>
 <div class="form-status" role="status" aria-live="polite"></div>
@@ -415,7 +429,7 @@ def org_schema(lang):
         "@type": "TravelAgency",
         "name": "Atlantis Travel",
         "url": SITE + "/",
-        "logo": SITE + "/assets/img/amblem.webp",
+        "logo": SITE + "/assets/img/logo-horizontal.png",
         "image": SITE + "/assets/img/og-image.jpg",
         "email": EMAIL,
         "telephone": [PHONE1_RAW, PHONE2_RAW],
@@ -432,93 +446,168 @@ def org_schema(lang):
 
 
 # ----------------------------------------------------------------- içerik
+REVIEWS = [
+    ("Zafer P.", "Atlantis Travel ile seyahat deneyimim mükemmeldi! Rezervasyon süreci hızlı ve sorunsuzdu, ekip her konuda yardımcı oldu. Kesinlikle tavsiye ederim!"),
+    ("Sercan T.", "Tereddütlerimizin olduğu seyahatimizde aklımızdaki tüm soru işaretlerini giderdiler. Bir sorun yaşadığımızda geri dönüşleri çok hızlı oldu."),
+    ("Emre Ş.", "Turizm sektöründe birlikte çalıştığımız bir acenta, oldukça iyi ve kaliteli hizmetlerinden dolayı çok memnunuz."),
+    ("Can A.", "Müşteri memnuniyetini önde tutan bir firma, güvenilir, herkese tavsiye ederim."),
+    ("Ekrem İ.", "Mükemmel bir servis, çok yetenekli ve güler yüzlü personeli ile sorunsuz bir yolculuk yaşamak istiyorsanız Atlantis Travel rehberiniz olsun."),
+]
+GREVIEW = "https://g.page/r/CUzJql2zq06IEBM/review"
+
+
+def pic(name, alt, w=600, h=600, lazy=True, cls=""):
+    ld = ' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high"'
+    c = f' class="{cls}"' if cls else ""
+    return (f'<picture><source srcset="/assets/img/{name}.webp" type="image/webp">'
+            f'<img{c} src="/assets/img/{name}.jpg" width="{w}" height="{h}" alt="{e(alt)}"{ld}></picture>')
+
+
+def reviews_block(lang, n=3):
+    T = lang == "tr"
+    stars = "".join(icon("star") for _ in range(5))
+    cards_html = "".join(
+        f'<figure class="review reveal"><div class="stars" aria-label="5/5">{stars}</div>'
+        f'<blockquote>“{e(t)}”</blockquote><figcaption>{e(nm)}</figcaption></figure>' for nm, t in REVIEWS[:n])
+    return f"""<div class="reviews-head"><div class="stars big" aria-hidden="true">{stars}</div>
+<strong>{"Google yorumlarımız" if T else "Our Google reviews"}</strong>
+<a class="more" href="{GREVIEW}" target="_blank" rel="noopener">{"Tüm yorumlar" if T else "All reviews"} →</a></div>
+<div class="reviews">{cards_html}</div>
+<p class="review-note">{"Yorumlar Google İşletme profilimizden alınmıştır." if T else "Reviews are taken from our Google Business profile (originally in Turkish)."}</p>"""
+
+
 def build_home(lang):
     T = lang == "tr"
     u = UI[lang]
-    title = ("Atlantis Travel | İstanbul Kurumsal Otel Konaklama ve VIP Transfer" if T else
-             "Atlantis Travel | Corporate Hotel Accommodation & VIP Transfer in Istanbul")
-    desc = ("İstanbul'da 200'den fazla otelle çalışan ağımızla şirketler, sağlık kuruluşları ve gruplar için kurumsal otel konaklama, VIP havalimanı transferi ve 7/24 operasyon desteği." if T else
-            "Corporate hotel accommodation, VIP airport transfers and 24/7 operations support in Istanbul for companies, healthcare providers and groups, through a network of 200+ hotels.")
+    title = ("Atlantis Travel | Kurumsal Konaklama ve Operasyonel Seyahat Çözümleri" if T else
+             "Atlantis Travel | Corporate Accommodation & Travel Operations in Istanbul")
+    desc = ("İstanbul'da hastaneler, sağlık turizmi firmaları, fuar katılımcıları ve şirketler için kurumsal otel konaklama, transfer organizasyonu ve 7/24 operasyon desteği." if T else
+            "Corporate hotel accommodation, transfer organisation and 24/7 operations support in Istanbul for hospitals, medical tourism companies, trade fair exhibitors and businesses.")
     h = head(lang, "home", title, desc, [org_schema(lang)]) + header(lang, "home")
-    h += f"""<section class="hero on-navy"><div class="wrap">
-<div>
-<p class="eyebrow">{"İstanbul · Kurumsal konaklama ve VIP transfer" if T else "Istanbul · Corporate accommodation & VIP transfer"}</p>
-<h1>{"Şirketler, sağlık kuruluşları ve heyetler için İstanbul'da güvenilir konaklama." if T else "Reliable accommodation in Istanbul for companies, healthcare providers and delegations."}</h1>
-<p class="lead">{"İstanbul'da 200'den fazla otelle çalışan ağımızla otel konaklamasını, VIP havalimanı transferini ve operasyon takibini tek noktadan yönetiyoruz." if T else "With a network of more than 200 hotels in Istanbul, we manage hotel stays, VIP airport transfers and on-the-ground operations from a single point of contact."}</p>
-<div class="actions"><a class="btn btn-gold" href="{url("teklif", lang)}">{"Kurumsal teklif alın" if T else "Request a corporate quote"}</a>
-<a class="btn btn-line" href="https://wa.me/{WA}" target="_blank" rel="noopener">{icon("wa")}{"WhatsApp'tan yazın" if T else "Message us on WhatsApp"}</a></div>
-</div>
-<div class="hero-art"><picture><source srcset="/assets/img/logo-atlantis-travel.webp" type="image/webp">
-<img src="/assets/img/logo-atlantis-travel.jpg" width="720" height="469" alt="Atlantis Travel logosu: altın AT monogramı ve trident amblemi" fetchpriority="high"></picture>{SKYLINE}</div>
+    feats = ([("clock", "7/24 Destek"), ("pin", "Hastane ve fuar alanlarına yakın oteller"),
+              ("car", "Transfer organizasyonu"), ("tag", "Kuruma özel fiyatlandırma")] if T else
+             [("clock", "24/7 support"), ("pin", "Hotels near hospitals and expo centres"),
+              ("car", "Transfer organisation"), ("tag", "Pricing tailored to your organisation")])
+    fl = "".join(f'<li>{icon(i)}<span>{e(t)}</span></li>' for i, t in feats)
+    h += f"""<section class="hero2">
+<picture class="bg"><source srcset="/assets/img/hero-lobby.webp" type="image/webp"><img src="/assets/img/hero-lobby.jpg" width="1024" height="1024" alt="" fetchpriority="high"></picture>
+<div class="wrap">
+<p class="pill">{"Sağlık kurumları için kurumsal seyahat" if T else "Corporate travel for healthcare providers"}</p>
+<h1>{"Kurumsal Konaklama ve Operasyonel Seyahat Çözümleri" if T else "Corporate Accommodation and Travel Operations"}</h1>
+<p class="lead">{"Profesyonel operasyon yönetimi ile bütçeye uygun, hızlı ve sürdürülebilir hizmet" if T else "Budget-friendly, fast and sustainable service backed by professional operations management"}</p>
+<div class="actions"><a class="btn btn-gold" href="#teklif">{"Hemen Teklif Al" if T else "Get a Quote"}</a>
+<a class="btn btn-outline" href="https://wa.me/{WA}" target="_blank" rel="noopener">{"WhatsApp ile Yazın" if T else "Message us on WhatsApp"}</a></div>
+<ul class="hero-feats">{fl}</ul>
+<a class="scroll" href="#kimler" aria-label="{"Aşağı kaydır" if T else "Scroll down"}">{icon("chev")}</a>
 </div></section>
-<div class="wrap facts"><ul>
-<li><strong>200+</strong><span>{"İstanbul'da çalıştığımız otel" if T else "Partner hotels in Istanbul"}</span></li>
-<li><strong>7/24</strong><span>{"Operasyon desteği" if T else "Operations support"}</span></li>
-<li><strong>IST · SAW</strong><span>{"İki havalimanında VIP karşılama" if T else "VIP meet & greet at both airports"}</span></li>
-<li><strong>TR · EN</strong><span>{"İki dilde hizmet" if T else "Service in two languages"}</span></li>
-</ul></div>
 """
-    svc = [
-        {"icon": "hotel", "t": u["nav"][0][1],
-         "d": ("Şirketler, kamu kurumları, klinikler ve gruplar için her segmentten otelde planlı, bütçeye uygun konaklama." if T else
-               "Planned, budget-aligned stays in hotels of every category for companies, public institutions, clinics and groups."),
-         "href": url("konaklama", lang), "more": "Ayrıntılar" if T else "Learn more"},
-        {"icon": "car", "t": u["nav"][1][1],
-         "d": ("İstanbul Havalimanı ve Sabiha Gökçen'den Mercedes Vito araçlarla özel karşılama ve transfer." if T else
-               "Private meet & greet and transfers from Istanbul Airport and Sabiha Gökçen with Mercedes Vito vehicles."),
-         "href": url("transfer", lang), "more": "Ayrıntılar" if T else "Learn more"},
-        {"icon": "health", "t": u["nav"][2][1],
-         "d": ("Özel hastaneler ve diş klinikleri için hasta ve refakatçi konaklaması, hastane transferleri." if T else
-               "Patient and companion accommodation and hospital transfers for private hospitals and dental clinics."),
-         "href": url("saglik", lang), "more": "Ayrıntılar" if T else "Learn more"},
-        {"icon": "group", "t": "Grup ve Takım Konaklamaları" if T else "Group & Team Stays",
-         "d": ("Heyetler, delegasyonlar, spor ve futbol takımları için toplu konaklama ve transfer organizasyonu." if T else
-               "Group accommodation and transfers for delegations, sports and football teams."),
-         "href": url("cozumler", lang), "more": "Ayrıntılar" if T else "Learn more"},
-        {"icon": "fair", "t": u["nav"][3][1],
-         "d": ("TÜYAP Beylikdüzü ve İstanbul Fuar Merkezi'ne gelen katılımcılar için fuar alanlarına yakın konaklama." if T else
-               "Accommodation near TÜYAP Beylikdüzü and Istanbul Expo Center for exhibitors and visitors."),
-         "href": url("fuar", lang), "more": "Ayrıntılar" if T else "Learn more"},
-        {"icon": "ops", "t": "Operasyonel Süreç Yönetimi" if T else "Operations Management",
-         "d": ("Rezervasyondan çıkışa kadar tüm süreci tek muhatapla yöneterek kurumunuzun operasyon yükünü azaltıyoruz." if T else
-               "We manage the whole process from booking to check-out through a single contact, reducing your team's workload."),
-         "href": url("cozumler", lang), "more": "Ayrıntılar" if T else "Learn more"},
-    ]
+    who = ([("steth", "Hastaneler ve Klinikler", "Hasta yakını ve sağlık personeli konaklaması"),
+            ("globe", "Sağlık Turizmi Firmaları", "Yurt dışından gelen hastalar için konaklama ve transfer"),
+            ("building", "Fuar Katılımcıları", "İstanbul fuarları için fuar alanına yakın toplu konaklama"),
+            ("briefcase", "Kurumsal Şirketler", "İş seyahati ve ekip konaklaması")] if T else
+           [("steth", "Hospitals and Clinics", "Accommodation for patients' relatives and medical staff"),
+            ("globe", "Medical Tourism Companies", "Accommodation and transfers for patients from abroad"),
+            ("building", "Trade Fair Exhibitors", "Group stays close to Istanbul's expo centres"),
+            ("briefcase", "Corporate Companies", "Business travel and team accommodation")])
+    whoh = "".join(f'<article class="who reveal"><span class="gi">{icon(i)}</span><h3>{e(t)}</h3><p>{e(d)}</p></article>' for i, t, d in who)
+    svc = ([("svc-konaklama", "hotel", "Yurt İçi Konaklama", "Talep edilen bölgelerde her segmentten otel seçeneği ve bütçeye uygun fiyat alternatifleri ile kaliteli konaklama hizmeti sunuyoruz.", "konaklama"),
+            ("svc-transfer", "car", "Transfer Organizasyonu", "Profesyonel transfer hizmetleri ile hastalarınızın ve personellerinizin güvenli ve konforlu ulaşımını sağlıyoruz.", "transfer"),
+            ("svc-operasyon", "ops", "Operasyonel Süreç Yönetimi", "Tüm operasyonel süreçleri profesyonel bir anlayışla yöneterek sağlık kurumlarınızın operasyonel yükünü azaltıyoruz.", "saglik"),
+            ("svc-grup", "group", "Grup ve Futbol Takımı Konaklamaları", "Spor kulüpleri ve büyük gruplar için özel konaklama paketleri sunuyoruz. Futbol takımları, spor organizasyonları ve kurumsal gruplar için uygun fiyatlı, konforlu ve organize konaklama çözümleri sağlıyoruz.", "cozumler")] if T else
+           [("svc-konaklama", "hotel", "Accommodation in Türkiye", "Hotels of every category in the areas you need, with budget-friendly alternatives and quality service.", "konaklama"),
+            ("svc-transfer", "car", "Transfer Organisation", "Professional transfers for safe and comfortable travel of your patients and staff.", "transfer"),
+            ("svc-operasyon", "ops", "Operations Management", "We manage every operational step professionally to lighten the workload of your organisation.", "saglik"),
+            ("svc-grup", "group", "Group and Football Team Stays", "Tailored accommodation packages for sports clubs, football teams, sports events and corporate groups: affordable, comfortable and well organised.", "cozumler")])
+    svch = "".join(f'<a class="svc reveal" href="{url(k, lang)}">{pic(img, t)}<div class="b"><span class="si">{icon(i)}</span><h3>{e(t)}</h3><p>{e(d)}</p></div></a>' for img, i, t, d, k in svc)
+    stp = ([("Talebinizi İletin", "Form, telefon veya WhatsApp üzerinden ihtiyaçlarınızı paylaşın."),
+            ("Size Özel Teklif", "Tarih, konum ve bütçenize uygun otel ve transfer seçeneklerini hazırlayalım."),
+            ("Organizasyon Bizde", "Konaklama ve transferiniz planlandığı gibi yürütülsün, 7/24 yanınızdayız.")] if T else
+           [("Send Your Request", "Share your needs via the form, phone or WhatsApp."),
+            ("Tailored Offer", "We prepare hotel and transfer options matched to your dates, location and budget."),
+            ("We Handle the Rest", "Your stay and transfers run as planned, with 24/7 support.")])
+    stph = "".join(f'<li class="reveal"><span class="num">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(d)}</p></li>' for i, (t, d) in enumerate(stp))
+    why = ([("Güvenilir İş Ortaklığı", "Sağlık sektörüne özel çözümlerimizle uzun vadeli iş ortaklıkları kuruyoruz."),
+            ("Her Segmentten Otel Seçeneği", "Geniş otel ağımız sayesinde her bütçeye uygun kaliteli konaklama alternatifleri sunuyoruz."),
+            ("Bütçeye Uygun Fiyatlar", "Anlaşmalı otellerimiz ile uygun fiyatlar ve şeffaf fiyatlandırma sunuyoruz.")] if T else
+           [("Reliable Partnership", "We build long-term partnerships with solutions designed for the healthcare sector."),
+            ("Hotels in Every Category", "Our wide hotel network offers quality options for every budget."),
+            ("Budget-Friendly Prices", "Competitive rates with our partner hotels and transparent pricing.")])
+    whyh = "".join(f'<li>{icon("check")}<div><h3>{e(t)}</h3><p>{e(d)}</p></div></li>' for t, d in why)
+    h += f"""<section class="section" id="kimler"><div class="wrap">
+<h2 class="center-h">{"Kimlere Hizmet Veriyoruz?" if T else "Who We Serve"}</h2>
+<div class="who-grid">{whoh}</div>
+</div></section>
+<section class="section pt0"><div class="wrap">
+<h2 class="center-h">{"Hizmetlerimiz" if T else "Our Services"}</h2>
+<p class="center-p">{"Sağlık kurumlarınız için kapsamlı konaklama ve seyahat çözümleri" if T else "Comprehensive accommodation and travel solutions for your organisation"}</p>
+<div class="svc-grid">{svch}</div>
+</div></section>
+<section class="section pt0"><div class="wrap">
+<h2 class="center-h">{"Nasıl Çalışır?" if T else "How It Works"}</h2>
+<ol class="steps3">{stph}</ol>
+</div></section>
+<section class="why"><div class="wrap">
+<div><h2>{"Neden Atlantis Travel?" if T else "Why Atlantis Travel?"}</h2>
+<p class="sub">{"Güvenilir iş ortaklığı modeliyle hızlı, planlı ve sürdürülebilir hizmet" if T else "Fast, planned and sustainable service through a reliable partnership model"}</p>
+<span class="rule"></span><ul class="why-list">{whyh}</ul></div>
+<div class="why-img">{pic("is-ortakligi", "Kurumsal iş ortaklığı" if T else "Business partnership")}</div>
+</div></section>
+<section class="section"><div class="wrap">{reviews_block(lang)}</div></section>
+"""
+    h += quick_form(lang)
+    h += f"""<section class="consult"><div class="wrap">
+<h2>{"Kurumsal Seyahat Çözümleriniz İçin Bizimle İletişime Geçin" if T else "Contact Us for Your Corporate Travel Needs"}</h2>
+<p>{"Operasyonel verimliliğinizi artırın, maliyetlerinizi optimize edin. Profesyonel ekibimiz size özel çözümler sunmak için hazır." if T else "Improve operational efficiency and optimise costs. Our team is ready to offer solutions tailored to you."}</p>
+<a class="btn btn-gold" href="{url("contact", lang)}">{"Ücretsiz Danışmanlık Alın" if T else "Get Free Consultation"}</a>
+</div></section>
+"""
+    h += footer(lang)
+    return h
+
+
+def quick_form(lang):
+    T = lang == "tr"
+    return f"""<section class="section qf" id="teklif"><div class="wrap">
+<h2 class="center-h">{"Hızlı Teklif Alın" if T else "Get a Quick Quote"}</h2>
+<p class="center-p">{"Bilgilerinizi paylaşın, size en uygun konaklama teklifini hemen gönderelim" if T else "Share your details and we will send you the most suitable accommodation offer"}</p>
+<div class="qf-card"><div class="qf-head">{"Teklif Formu" if T else "Quote Form"}</div>
+{qform(lang, "teklif")}</div>
+</div></section>
+"""
+
+
+def build_referans(lang):
+    T = lang == "tr"
+    title = "Referanslarımız | Atlantis Travel" if T else "References | Atlantis Travel"
+    desc = ("Atlantis Travel hakkında Google yorumları ve birlikte çalıştığımız kurum türleri." if T else
+            "Google reviews about Atlantis Travel and the types of organisations we work with.")
+    h = head(lang, "referans", title, desc, [org_schema(lang)]) + header(lang, "referans")
+    h += page_hero(lang, "Güvenilir İş Ortaklığı" if T else "Reliable Partnership", "Referanslarımız" if T else "Our References",
+                   "Sağlık kurumları ve kurumsal firmalarla yürüttüğümüz iş birlikleri" if T else
+                   "Our collaborations with healthcare providers and corporate companies",
+                   "Referanslar" if T else "References")
+    stars = "".join(icon("star") for _ in range(5))
+    allrev = "".join(f'<figure class="review reveal"><div class="stars">{stars}</div><blockquote>“{e(t)}”</blockquote><figcaption>{e(nm)}</figcaption></figure>' for nm, t in REVIEWS)
+    kinds = (["Özel Sağlık Kurumları", "Hastane Zincirleri", "Klinik Grupları", "Medikal Merkezler", "Sağlık Turizmi Firmaları", "Kurumsal Şirketler"] if T else
+             ["Private Healthcare Providers", "Hospital Groups", "Clinic Groups", "Medical Centres", "Medical Tourism Companies", "Corporate Companies"])
+    kh = "".join(f'<li>{icon("check")}{e(k)}</li>' for k in kinds)
     h += f"""<section class="section"><div class="wrap">
-{section_head("Hizmetlerimiz" if T else "Our services",
-              "Konaklama ve ulaşımı tek elden yönetin" if T else "Accommodation and transport, managed in one place",
-              "Her talep için konuma ve bütçeye uygun otel seçenekleri, transfer planı ve operasyon takibi." if T else
-              "For every request: hotel options matched to location and budget, a transfer plan and operational follow-up.")}
-{cards(svc, featured_first=True)}
+<h2 class="center-h">{"Google'da Müşterilerimiz Ne Diyor?" if T else "What Our Clients Say on Google"}</h2>
+<div class="reviews">{allrev}</div>
+<div class="center-actions"><a class="btn btn-gold" href="{GREVIEW}" target="_blank" rel="noopener">{"Google'da tüm yorumları gör" if T else "See all reviews on Google"}</a>
+<a class="btn btn-ghost" href="{GREVIEW}" target="_blank" rel="noopener">{"Siz de yorum bırakın" if T else "Leave a review"}</a></div>
 </div></section>
-<section class="section white"><div class="wrap split">
-<div>
-<p class="eyebrow">{"Süreç" if T else "How it works"}</p>
-<h2 style="font-size:clamp(1.9rem,3vw,2.6rem);margin-bottom:28px">{"Dört adımda organizasyon" if T else "Organised in four steps"}</h2>
-{steps([("Talebinizi iletin", "Tarih, bölge, kişi ve oda sayısını form veya WhatsApp ile paylaşın."),
-        ("Seçenekleri sunalım", "Bütçenize ve konumunuza uygun otel ve transfer önerilerini hazırlayalım."),
-        ("Onay ve rezervasyon", "Seçtiğiniz oteller için rezervasyonu yapıp onay belgelerini iletelim."),
-        ("Operasyonu takip edelim", "Giriş, transfer ve değişiklikleri 7/24 tek muhatapla yönetelim.")] if T else
-       [("Send your request", "Share dates, area, number of guests and rooms via the form or WhatsApp."),
-        ("Receive options", "We prepare hotel and transfer options matched to your budget and location."),
-        ("Confirm and book", "We make the bookings you choose and send the confirmations."),
-        ("We follow up", "Check-ins, transfers and changes handled 24/7 by a single contact.")])}
-</div>
-{panel("Neden Atlantis Travel" if T else "Why Atlantis Travel",
-       "Operasyonel güvence, tek muhatap" if T else "Operational reliability, one contact",
-       [("İstanbul'a özel otel ağı", "200'den fazla otelle her bölgede, her segmentten seçenek."),
-        ("Sağlık kuruluşlarına uygun süreç", "Hasta, refakatçi ve personel konaklamasını kurumunuzun planına göre organize ederiz."),
-        ("Konaklama ve transfer birlikte", "Havalimanından otele, otelden hastaneye veya fuara tek plan."),
-        ("Şeffaf iletişim", "Teklif, rezervasyon ve değişiklikler yazılı olarak ve tek muhatapla yürütülür.")] if T else
-       [("A network built for Istanbul", "200+ hotels across every district and category."),
-        ("Processes suited to healthcare providers", "Patient, companion and staff stays organised around your schedule."),
-        ("Accommodation and transfer together", "One plan from airport to hotel, hotel to hospital or expo."),
-        ("Clear communication", "Quotes, bookings and changes handled in writing by one contact.")])}
+<section class="section white"><div class="wrap">
+<h2 class="center-h">{"İş Ortaklarımız" if T else "Who We Work With"}</h2>
+<p class="center-p">{"Güvenilir kurumsal çözümler sunduğumuz sağlık kurumları ve firmalar" if T else "Healthcare providers and companies we offer reliable corporate solutions to"}</p>
+<ul class="kinds">{kh}</ul>
+</div></section>
+<section class="consult"><div class="wrap">
+<h2>{"Siz de İş Ortağımız Olun" if T else "Become Our Partner"}</h2>
+<p>{"Kurumsal konaklama ve seyahat ihtiyaçlarınız için güvenilir çözümler sunuyoruz." if T else "We provide reliable solutions for your corporate accommodation and travel needs."}</p>
+<a class="btn btn-gold" href="{url("contact", lang)}">{"İletişime Geçin" if T else "Contact Us"}</a>
 </div></section>
 """
-    h += form_section(lang, "Kurumsal talebinizi gönderin" if T else "Send us your corporate request",
-                      "Formu doldurun; ekibimiz e-posta veya telefonla size dönüş yapsın. Acil talepler için WhatsApp hattımız 7/24 açıktır." if T else
-                      "Fill in the form and our team will reply by email or phone. For urgent requests our WhatsApp line is open 24/7.")
     h += footer(lang)
     return h
 
@@ -958,10 +1047,11 @@ BUILDERS = {
     "home": build_home, "konaklama": build_konaklama, "transfer": build_transfer, "saglik": build_saglik,
     "fuar": build_fuar, "cozumler": build_cozumler, "about": build_about, "teklif": build_teklif,
     "contact": build_contact, "sss": build_sss, "privacy": build_privacy, "terms": build_terms, "thanks": build_thanks,
+    "referans": build_referans,
 }
 
 PRIORITY = {"home": "1.0", "konaklama": "0.9", "transfer": "0.9", "saglik": "0.9", "fuar": "0.8", "cozumler": "0.8",
-            "teklif": "0.8", "about": "0.6", "contact": "0.7", "sss": "0.5", "privacy": "0.2", "terms": "0.2"}
+            "teklif": "0.8", "about": "0.6", "contact": "0.7", "sss": "0.5", "privacy": "0.2", "terms": "0.2", "referans": "0.6"}
 
 
 def main():
