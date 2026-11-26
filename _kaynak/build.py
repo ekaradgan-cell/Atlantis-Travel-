@@ -26,7 +26,7 @@ BIZ_DISTRICT = "Esenyurt"
 BIZ_ADDR = BIZ_STREET + ", " + BIZ_DISTRICT + " / İstanbul"
 BIZ_TAX_OFFICE = "Beylikdüzü"
 BIZ_FOUNDED = "2025-03-11"
-VERSION = "20261126a"
+VERSION = "20261126b"
 
 e = html.escape
 
@@ -189,6 +189,7 @@ def head(lang, key, title, desc, schema=None):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v={VERSION}">
 <script src="/assets/js/site.js?v={VERSION}" defer></script>
+<script src="/assets/js/motion.js?v={VERSION}" defer></script>
 {ld}</head>
 """
 
