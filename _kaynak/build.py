@@ -26,7 +26,7 @@ BIZ_DISTRICT = "Esenyurt"
 BIZ_ADDR = BIZ_STREET + ", " + BIZ_DISTRICT + " / İstanbul"
 BIZ_TAX_OFFICE = "Beylikdüzü"
 BIZ_FOUNDED = "2025-03-11"
-VERSION = "20261126b"
+VERSION = "20261126c"
 
 e = html.escape
 
@@ -983,7 +983,7 @@ KK = {
         "adv_s": "Sağlık kurumlarının operasyonel yükünü azaltarak güvenilir iş ortaklığı sunuyoruz",
         "adv": [("handshake", "Güvenilir İş Ortaklığı", "Sağlık sektörüne özel çözümlerimizle uzun vadeli iş ortaklıkları kuruyoruz"),
                 ("hotel", "Her Segmentten Otel Seçeneği", "Geniş anlaşmalı otel ağı ile her bütçeye uygun kaliteli konaklama alternatifleri"),
-                ("tag", "Bütçeye Uygun Fiyatlar", "Anlaşmalı otellerimiz ile en uygun fiyat garantisi ve şeffaf fiyatlandırma"),
+                ("tag", "Bütçeye Uygun Fiyatlar", "Anlaşmalı otellerimiz ile kuruma özel fiyat ve kalem kalem, şeffaf teklif"),
                 ("clock", "Hızlı ve Planlı Hizmet", "Profesyonel ekibimiz ile hızlı rezervasyon ve operasyonel süreç yönetimi")],
         "svc_h": "Hizmet Kapsamımız",
         "svc_s": "Kapsamlı konaklama ve seyahat çözümleri",
@@ -1033,7 +1033,7 @@ KK = {
         "adv_s": "We offer a reliable partnership that reduces the operational burden of healthcare institutions",
         "adv": [("handshake", "Reliable Partnership", "We establish long-term partnerships with our healthcare-specific solutions"),
                 ("hotel", "Hotels from Every Segment", "Quality accommodation alternatives for every budget with extensive contracted hotel network"),
-                ("tag", "Budget-Friendly Prices", "Best price guarantee and transparent pricing with our contracted hotels"),
+                ("tag", "Budget-Friendly Prices", "Corporate rates and itemised, transparent quotes with our contracted hotels"),
                 ("clock", "Fast and Planned Service", "Quick reservations and operational process management with our professional team")],
         "svc_h": "Our Service Scope",
         "svc_s": "Comprehensive accommodation and travel solutions",
@@ -1135,7 +1135,7 @@ FAIR = {
         "ben_h": "Neden Atlantis Travel?",
         "ben": [("Fuar Deneyimi", "Yıllardır uluslararası fuar katılımcılarına hizmet veren deneyimli ekibimiz"),
                 ("Geniş Otel Ağı", "Her segmentten 100+ otel seçeneği ile esnek rezervasyon imkanı"),
-                ("Rekabetçi Fiyatlar", "Toplu rezervasyon avantajlarımızla bütçenize uygun en iyi fiyatlar"),
+                ("Rekabetçi Fiyatlar", "Toplu rezervasyon avantajlarımızla bütçenize uygun, kuruma özel fiyatlar"),
                 ("Tek Noktadan Hizmet", "Konaklama, transfer ve tüm organizasyon ihtiyaçlarınız için tek muhatap")],
         "fc_h": "Hizmet Verdiğimiz Fuar Merkezleri",
         "fc": [("Beylikdüzü Fuar Merkezi", "Avrupa yakasının en büyük fuar merkezi olan Beylikdüzü Fuar Merkezi'ne yakın konumda, ekonomik ve lüks segment otel seçenekleri sunuyoruz.",
@@ -1167,7 +1167,7 @@ FAIR = {
         "ben_h": "Why Atlantis Travel?",
         "ben": [("Fair Experience", "Our experienced team that has been serving international fair participants for years"),
                 ("Wide Hotel Network", "Flexible reservation opportunity with 100+ hotel options from every segment"),
-                ("Competitive Prices", "Best prices suitable for your budget with our bulk reservation advantages"),
+                ("Competitive Prices", "Corporate rates that fit your budget, backed by our group booking advantages"),
                 ("One-Stop Service", "Single point of contact for accommodation, transfer and all your organizational needs")],
         "fc_h": "Fair Centers We Serve",
         "fc": [("Beylikdüzü Fair Center", "We offer economical and luxury segment hotel options close to Beylikdüzü Fair Center, the largest fair center on the European side.",
@@ -1188,6 +1188,60 @@ FAIR = {
 }
 
 
+
+# ----------------------------------------------------------------- 3D fuar haritası
+# Temsili, ölçeksiz İstanbul haritası. Konumlar viewBox 1000x620 üzerinde (yaklaşık enlem/boylam izdüşümü).
+FAIR_MAP_PTS = [
+    # anahtar, x, y, tür, TR adı, TR alt, EN adı, EN alt
+    ("ofis", 225, 361, "home", "Atlantis Travel", "Ofisimiz · Esenyurt", "Atlantis Travel", "Our office · Esenyurt"),
+    ("tuyap", 165, 394, "fair", "TÜYAP", "Fuar ve Kongre Merkezi · Beylikdüzü", "TÜYAP", "Fair & Congress Center · Beylikdüzü"),
+    ("ifm", 370, 423, "fair", "İFM", "İstanbul Fuar Merkezi · Yeşilköy", "IFM", "Istanbul Expo Center · Yeşilköy"),
+    ("ist", 300, 88, "air", "IST", "İstanbul Havalimanı", "IST", "Istanbul Airport"),
+    ("saw", 860, 507, "air", "SAW", "Sabiha Gökçen Havalimanı", "SAW", "Sabiha Gökçen Airport"),
+]
+FAIR_MAP_SVG = (
+    '<svg class="fm-svg" viewBox="0 0 1000 620" aria-hidden="true" focusable="false">'
+    '<defs><pattern id="fmgrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="rgba(138,109,29,.10)" stroke-width="1"/></pattern>'
+    '<radialGradient id="fmglow" cx="22%" cy="60%" r="55%"><stop offset="0" stop-color="rgba(212,175,55,.30)"/><stop offset="1" stop-color="rgba(212,175,55,0)"/></radialGradient></defs>'
+    '<rect width="1000" height="620" fill="#ECE5D5"/><rect width="1000" height="620" fill="url(#fmgrid)"/><rect width="1000" height="620" fill="url(#fmglow)"/>'
+    '<g class="fm-water" fill="#0F2440" stroke="rgba(212,175,55,.7)" stroke-width="2">'
+    '<path d="M0,0H1000V175C960,170 900,165 840,170C780,175 720,160 680,150C660,146 650,140 640,135C600,110 560,80 500,60C420,40 350,30 280,32C200,35 120,40 0,45Z"/>'
+    '<path d="M0,420C60,405 110,398 140,402C175,407 200,415 240,420C290,428 330,440 370,446C420,452 470,420 510,392C530,380 548,375 560,378C575,385 585,400 600,410C650,440 700,470 760,500C810,525 850,560 900,580C940,595 970,600 1000,605V620H0Z"/>'
+    '<ellipse cx="120" cy="378" rx="26" ry="17"/><ellipse cx="306" cy="400" rx="20" ry="12"/></g>'
+    '<path d="M648,140C624,190 640,230 615,270C595,305 605,342 560,378" fill="none" stroke="#0F2440" stroke-width="16" stroke-linecap="round"/>'
+    '<path d="M552,374C532,360 512,350 488,342" fill="none" stroke="#0F2440" stroke-width="6" stroke-linecap="round"/>'
+    '<g class="fm-routes" fill="none" stroke="#B8902A" stroke-width="2.6" stroke-linecap="round">'
+    '<path d="M225,361Q190,365 165,394"/><path d="M225,361Q300,375 370,423"/><path d="M300,88Q210,220 165,394"/><path d="M860,507Q620,560 370,423"/></g>'
+    '<g class="fm-labels" font-family="Inter,Arial,sans-serif" font-size="15" letter-spacing="4">'
+    '<g fill="rgba(201,211,225,.75)"><text x="770" y="80">{sea1}</text><text x="250" y="560">{sea2}</text></g><g fill="rgba(15,36,64,.45)"><text x="250" y="250">{side1}</text><text x="700" y="330">{side2}</text></g></g>'
+    '</svg>'
+)
+
+
+def fair_map(lang):
+    T = lang == "tr"
+    svg = FAIR_MAP_SVG.format(sea1="KARADENİZ" if T else "BLACK SEA", sea2="MARMARA DENİZİ" if T else "SEA OF MARMARA",
+                              side1="AVRUPA YAKASI" if T else "EUROPEAN SIDE", side2="ANADOLU YAKASI" if T else "ASIAN SIDE")
+    pins = "".join(
+        f'<div class="fm-pin fm-{kind}" data-k="{k}" style="left:{x / 10:.1f}%;top:{y / 6.2:.1f}%"><span class="fm-up">'
+        f'<span class="fm-tag">{e(tn if T else en)}</span><span class="fm-stem"></span></span></div>'
+        for k, x, y, kind, tn, ts, en, es in FAIR_MAP_PTS)
+    legend = "".join(
+        f'<li data-k="{k}" tabindex="0"><span class="fm-dot fm-{kind}"></span><div><strong>{e(tn if T else en)}</strong><small>{e(ts if T else es)}</small></div></li>'
+        for k, x, y, kind, tn, ts, en, es in FAIR_MAP_PTS)
+    return f"""<section class="section fair-map"><div class="wrap fm-wrap">
+<div class="fm-text reveal"><p class="eyebrow">{"Konum avantajı" if T else "Location advantage"}</p>
+<h2>{"Fuar alanlarına bir adım uzaklıkta" if T else "One step from the fair grounds"}</h2>
+<p class="lead">{"Esenyurt'taki ofisimiz TÜYAP Fuar ve Kongre Merkezi'ne komşu. Fuar dönemlerinde ekiplerinizin konaklamasını ve havalimanı–otel–fuar transferlerini yerinde takip ediyoruz." if T else
+"Our office in Esenyurt is right next to TÜYAP Fair and Congress Center. During trade fairs we follow your team's accommodation and airport–hotel–venue transfers on site."}</p>
+<ul class="fm-legend">{legend}</ul>
+<p class="fm-note">{"Harita temsilidir, ölçekli değildir." if T else "Illustrative map, not to scale."}</p></div>
+<div class="fm-stage" role="img" aria-label="{"Atlantis Travel ofisi, TÜYAP, İstanbul Fuar Merkezi ve havalimanlarını gösteren temsili İstanbul haritası" if T else "Illustrative Istanbul map showing the Atlantis Travel office, TÜYAP, Istanbul Expo Center and the airports"}">
+<div class="fm-plane">{svg}{pins}</div></div>
+</div></section>
+"""
+
+
 def build_fuar(lang):
     F = FAIR[lang]
     schema = [org_schema(lang), service_schema(lang, "fuar", F["schema"])]
@@ -1204,7 +1258,7 @@ def build_fuar(lang):
 {section_head(F["crumb"], F["fc_h"])}
 {cards(fc)}
 </div></section>
-<section class="section"><div class="wrap">
+{fair_map(lang)}<section class="section"><div class="wrap">
 {section_head(F["crumb"], F["sv_h"])}
 {cards([{"icon": i, "t": t, "d": d} for i, t, d in F["sv"]])}
 </div></section>
