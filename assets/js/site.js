@@ -178,34 +178,48 @@
     });
   });
 
-  /* Çerez onayı: Google Analytics yalnızca kabul edilirse yüklenir */
+  /* Çerez onayı: Google Analytics izin modu (Consent Mode v2) ile yüklenir.
+     İzin verilmeden çerez yazılmaz; yalnızca anonim, çerezsiz ölçüm sinyali gönderilir. */
   var KEY = 'at_cookie_consent';
   function getC() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function setC(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-  function loadGA() {
+  function initGA(granted) {
     if (window.gtag || !GA_ID) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: granted ? 'granted' : 'denied',
+      wait_for_update: 500
+    });
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID, { anonymize_ip: true });
     var s = document.createElement('script');
     s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { window.dataLayer.push(arguments); };
-    window.gtag('js', new Date());
-    window.gtag('config', GA_ID, { anonymize_ip: true });
+  }
+  function updateGA(granted) {
+    if (window.gtag) window.gtag('consent', 'update', { analytics_storage: granted ? 'granted' : 'denied' });
   }
   var banner = document.querySelector('.cookie');
   var c = getC();
-  if (c === 'all') loadGA();
-  else if (!c && banner) banner.classList.add('show');
+  initGA(c === 'all');
+  if (!c && banner) banner.classList.add('show');
   if (banner) {
     banner.addEventListener('click', function (e) {
       var b = e.target.closest('[data-consent]');
       if (!b) return;
       setC(b.getAttribute('data-consent'));
       banner.classList.remove('show');
-      if (b.getAttribute('data-consent') === 'all') loadGA();
+      updateGA(b.getAttribute('data-consent') === 'all');
     });
   }
   document.querySelectorAll('[data-cookie-settings]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); if (banner) banner.classList.add('show'); });
   });
 })();
+
+/* Menu golgesi (v3) */
+(function(){var h=document.querySelector('.site-header');if(!h)return;function f(){h.classList.toggle('scrolled',window.scrollY>8)}f();window.addEventListener('scroll',f,{passive:true});})();

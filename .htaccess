@@ -12,12 +12,21 @@ RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# www → www olmayan ana adres (tek kanonik alan adı)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# Eski blog adresi ana sayfaya (taşıma sonrası 404 düzeltmesi)
+RewriteRule ^blog/?$ / [L,R=301]
+
 # Kaynak ve yapılandırma dosyalarına dış erişimi engelle
 RewriteRule ^(_kaynak|inc|storage|\.git)(/|$) - [F,L]
 RewriteRule ^(README\.md|KURULUM\.md|\.gitignore)$ - [F,L]
 
 # Eski Promake adresleri
 RewriteRule ^turlar/?$ /services [R=301,L]
+RewriteRule ^turlar/.+$ /services [R=301,L]
+RewriteRule ^favicon\.ico$ /assets/img/favicon-32.png [R=301,L]
 RewriteRule ^team/?$ /about [R=301,L]
 RewriteRule ^index\.html$ / [R=301,L]
 RewriteRule ^en/index\.html$ /en/ [R=301,L]
