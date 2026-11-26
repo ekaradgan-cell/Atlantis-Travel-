@@ -1,4 +1,17 @@
 /* Atlantis Travel – hareket katmanı (v4). Bağımlılık yok. */
+/* Fuar haritası: lejant ile pin eşleştirme (hareket tercihinden bağımsız) */
+(function () {
+  document.querySelectorAll('.fair-map').forEach(function (sec) {
+    var pins = {};
+    sec.querySelectorAll('.fm-pin').forEach(function (p) { pins[p.getAttribute('data-k')] = p; });
+    sec.querySelectorAll('.fm-legend li').forEach(function (li) {
+      var p = pins[li.getAttribute('data-k')];
+      var on = function (v) { li.classList.toggle('on', v); if (p) p.classList.toggle('on', v); };
+      li.addEventListener('mouseenter', function () { on(true); }); li.addEventListener('focus', function () { on(true); });
+      li.addEventListener('mouseleave', function () { on(false); }); li.addEventListener('blur', function () { on(false); });
+    });
+  });
+})();
 (function () {
   'use strict';
   if (!window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -87,4 +100,25 @@
       cio.observe(el);
     });
   }
+  /* 3D fuar haritası: girişte yerine oturma + fareyle eğim */
+  document.querySelectorAll('.fair-map').forEach(function (sec) {
+    var plane = sec.querySelector('.fm-plane'), stage = sec.querySelector('.fm-stage');
+    if (!plane || !stage) return;
+    var base = innerWidth <= 520 ? { rx: 40, rz: -8 } : { rx: 52, rz: -14 };
+    var set = function (rx, rz) { plane.style.setProperty('--fm-rx', rx.toFixed(1) + 'deg'); plane.style.setProperty('--fm-rz', rz.toFixed(1) + 'deg'); };
+    if ('IntersectionObserver' in window) {
+      set(base.rx + 12, base.rz - 16);
+      var mio = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { mio.disconnect(); set(base.rx, base.rz); }
+      }, { threshold: 0.35 });
+      mio.observe(stage);
+    }
+    if (fine) {
+      stage.addEventListener('pointermove', function (e) {
+        var r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        set(base.rx + y * 10, base.rz + x * 14);
+      });
+      stage.addEventListener('pointerleave', function () { set(base.rx, base.rz); });
+    }
+  });
 })();
