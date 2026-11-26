@@ -19,7 +19,14 @@ WA = "905073978794"
 EMAIL = "info@atlantistraveltr.com"
 INSTAGRAM = "https://www.instagram.com/atlantis.traveltr"
 FACEBOOK = "https://www.facebook.com/atlantis.traveltr"
-VERSION = "20261107b"
+# Ticari bilgiler (vergi levhası). TC kimlik / vergi no sitede yayınlanmaz.
+BIZ_OWNER = "Emrah Karadoğan"
+BIZ_STREET = "Mehterçeşme Mah. 1945. Sk. No:7 İç Kapı No:2"
+BIZ_DISTRICT = "Esenyurt"
+BIZ_ADDR = BIZ_STREET + ", " + BIZ_DISTRICT + " / İstanbul"
+BIZ_TAX_OFFICE = "Beylikdüzü"
+BIZ_FOUNDED = "2025-03-11"
+VERSION = "20261126a"
 
 e = html.escape
 
@@ -117,6 +124,7 @@ UI = {
         "f_about": "İstanbul'da şirketler, sağlık kuruluşları ve gruplar için otel konaklama, VIP havalimanı transferi ve operasyon yönetimi.",
         "f_note": "Uçak bileti, vize ve yurt dışı otel rezervasyonu hizmeti verilmemektedir.",
         "cookies": "Çerez tercihleri", "rights": "Tüm hakları saklıdır.",
+        "biz_line": f"Atlantis Travel – {BIZ_OWNER} · {BIZ_ADDR} · Vergi Dairesi: {BIZ_TAX_OFFICE} · Konaklama aracılık hizmetleri",
         "cookie_text": "Sitemizin çalışması için zorunlu çerezler kullanılır. Ziyaret istatistikleri için Google Analytics çerezlerine izin verebilirsiniz. Ayrıntılar",
         "cookie_link": "Gizlilik ve Çerez Politikası", "accept": "Kabul et", "reject": "Yalnızca zorunlu",
         "call": "Ara", "wa": "WhatsApp", "wa_label": "WhatsApp ile yazın", "home": "Ana Sayfa",
@@ -133,6 +141,7 @@ UI = {
         "f_about": "Hotel accommodation, VIP airport transfers and operations management in Istanbul for companies, healthcare providers and groups.",
         "f_note": "We do not provide flight ticketing, visa services or hotel bookings abroad.",
         "cookies": "Cookie settings", "rights": "All rights reserved.",
+        "biz_line": f"Atlantis Travel – {BIZ_OWNER} (sole proprietorship) · {BIZ_ADDR}, Türkiye · Tax office: {BIZ_TAX_OFFICE} · Accommodation booking services",
         "cookie_text": "We use essential cookies to run this site. You can allow Google Analytics cookies for visitor statistics. Details:",
         "cookie_link": "Privacy and Cookie Policy", "accept": "Accept", "reject": "Essential only",
         "call": "Call", "wa": "WhatsApp", "wa_label": "Message us on WhatsApp", "home": "Home",
@@ -235,9 +244,10 @@ def footer(lang):
 <li><a href="tel:{PHONE1_RAW}">{PHONE1}</a> (WhatsApp)</li>
 <li><a href="tel:{PHONE2_RAW}">{PHONE2}</a></li>
 <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
+<li><address>Mehterçeşme Mah. 1945. Sk. No:7/2<br>{"Esenyurt / İstanbul" if T else "Esenyurt / Istanbul, Türkiye"}</address></li>
 </ul></div>
 </div>
-<div class="wrap legal"><span>© <span data-year>2026</span> Atlantis Travel. {u["rights"]}</span><span>{u["f_note"]}</span></div>
+<div class="wrap legal"><span>© <span data-year>2026</span> Atlantis Travel. {u["rights"]}</span><span>{u["f_note"]}</span><span class="biz-line">{u["biz_line"]}</span></div>
 </footer>
 <div class="float-btns"><a class="fb-call" href="tel:{PHONE1_RAW}" aria-label="{u["call"]}">{icon("phone")}</a>
 <a class="fb-wa" href="https://wa.me/{WA}" target="_blank" rel="noopener" aria-label="{u["wa_label"]}">{icon("wa")}</a></div>
@@ -434,7 +444,10 @@ def org_schema(lang):
         "image": SITE + "/assets/img/og-image.jpg",
         "email": EMAIL,
         "telephone": [PHONE1_RAW, PHONE2_RAW],
-        "address": {"@type": "PostalAddress", "addressLocality": "İstanbul", "addressCountry": "TR"},
+        "address": {"@type": "PostalAddress", "streetAddress": BIZ_STREET, "addressLocality": BIZ_DISTRICT,
+                    "addressRegion": "İstanbul", "addressCountry": "TR"},
+        "foundingDate": BIZ_FOUNDED,
+        "legalName": "Atlantis Travel – " + BIZ_OWNER,
         "areaServed": {"@type": "City", "name": "İstanbul"},
         "sameAs": [INSTAGRAM, FACEBOOK],
         "availableLanguage": ["tr", "en"],
@@ -493,7 +506,7 @@ def build_home(lang):
     h += f"""<section class="hero2">
 <picture class="bg"><source srcset="/assets/img/hero-lobby.webp" type="image/webp"><img src="/assets/img/hero-lobby.jpg" width="1024" height="1024" alt="" fetchpriority="high"></picture>
 <div class="wrap">
-<p class="pill">{"Sağlık kurumları için kurumsal seyahat" if T else "Corporate travel for healthcare institutions"}</p>
+<p class="pill">{"Hastaneler · Fuarlar · Kurumlar için İstanbul'da konaklama" if T else "Hospitals · Trade fairs · Companies — accommodation in Istanbul"}</p>
 <h1>{"Kurumsal Konaklama ve Operasyonel Seyahat Çözümleri" if T else "Corporate Accommodation and Travel Operations for Healthcare Institutions"}</h1>
 <p class="lead">{"Profesyonel operasyon yönetimi ile bütçeye uygun, hızlı ve sürdürülebilir hizmet" if T else "Professional operation management with budget-friendly, fast and sustainable service"}</p>
 <div class="actions"><a class="btn btn-gold" href="#teklif">{"Hemen Teklif Al" if T else "Get a Quote Now"}</a>
@@ -513,13 +526,13 @@ def build_home(lang):
     whoh = "".join(f'<article class="who reveal"><span class="gi">{icon(i)}</span><h3>{e(t)}</h3><p>{e(d)}</p></article>' for i, t, d in who)
     svc = ([("svc-konaklama", "hotel", "Yurt İçi Konaklama", "Talep edilen bölgelerde her segmentten otel seçeneği ve bütçeye uygun fiyat alternatifleri ile kaliteli konaklama hizmeti sunuyoruz.", "konaklama"),
             ("svc-transfer", "car", "Transfer Organizasyonu", "Profesyonel transfer hizmetleri ile hastalarınızın ve personellerinizin güvenli ve konforlu ulaşımını sağlıyoruz.", "transfer"),
-            ("svc-operasyon", "ops", "Operasyonel Süreç Yönetimi", "Tüm operasyonel süreçleri profesyonel bir anlayışla yöneterek sağlık kurumlarınızın operasyonel yükünü azaltıyoruz.", "saglik"),
-            ("svc-grup", "group", "Grup ve Futbol Takımı Konaklamaları", "Spor kulüpleri ve büyük gruplar için özel konaklama paketleri sunuyoruz. Futbol takımları, spor organizasyonları ve kurumsal gruplar için uygun fiyatlı, konforlu ve organize konaklama çözümleri sağlıyoruz.", "cozumler")] if T else
+            ("svc-operasyon", "ops", "Operasyonel Süreç Yönetimi", "Tüm operasyonel süreçleri profesyonel bir anlayışla yöneterek sağlık kurumlarınızın operasyonel yükünü azaltıyoruz.", "cozumler"),
+            ("svc-grup", "group", "Grup ve Futbol Takımı Konaklamaları", "Spor kulüpleri ve büyük gruplar için özel konaklama paketleri sunuyoruz. Futbol takımları, spor organizasyonları ve kurumsal gruplar için uygun fiyatlı, konforlu ve organize konaklama çözümleri sağlıyoruz.", url("teklif", "tr") + "?hizmet=grup-heyet")] if T else
            [("svc-konaklama", "hotel", "Domestic Accommodation", "We provide quality accommodation services with hotel options from all segments and budget-friendly price alternatives in the requested regions.", "konaklama"),
             ("svc-transfer", "car", "Transfer Organization", "We ensure safe and comfortable transportation for your patients and staff with professional transfer services.", "transfer"),
-            ("svc-operasyon", "ops", "Operational Process Management", "We reduce the operational burden of your healthcare institutions by managing all operational processes with a professional approach.", "saglik"),
-            ("svc-grup", "group", "Group and Football Team Accommodations", "We offer special accommodation packages for sports clubs and large groups. We provide affordable, comfortable, and organized accommodation solutions for football teams, sports organizations, and corporate groups.", "cozumler")])
-    svch = "".join(f'<a class="svc reveal" href="{url(k, lang)}">{pic(img, t)}<div class="b"><span class="si">{icon(i)}</span><h3>{e(t)}</h3><p>{e(d)}</p></div></a>' for img, i, t, d, k in svc)
+            ("svc-operasyon", "ops", "Operational Process Management", "We reduce the operational burden of your healthcare institutions by managing all operational processes with a professional approach.", "cozumler"),
+            ("svc-grup", "group", "Group and Football Team Accommodations", "We offer special accommodation packages for sports clubs and large groups. We provide affordable, comfortable, and organized accommodation solutions for football teams, sports organizations, and corporate groups.", url("teklif", "en") + "?service=grup-heyet")])
+    svch = "".join(f'<a class="svc reveal" href="{k if k.startswith("/") else url(k, lang)}">{pic(img, t)}<div class="b"><span class="si">{icon(i)}</span><h3>{e(t)}</h3><p>{e(d)}</p></div></a>' for img, i, t, d, k in svc)
     stp = ([("Talebinizi İletin", "Form, telefon veya WhatsApp üzerinden ihtiyaçlarınızı paylaşın."),
             ("Size Özel Teklif", "Tarih, konum ve bütçenize uygun otel ve transfer seçeneklerini hazırlayalım."),
             ("Organizasyon Bizde", "Konaklama ve transferiniz planlandığı gibi yürütülsün, 7/24 yanınızdayız.")] if T else
@@ -529,11 +542,15 @@ def build_home(lang):
     stph = "".join(f'<li class="reveal"><span class="num">{i+1:02d}</span><h3>{e(t)}</h3><p>{e(d)}</p></li>' for i, (t, d) in enumerate(stp))
     why = ([("Güvenilir İş Ortaklığı", "Sağlık sektörüne özel çözümlerimizle uzun vadeli iş ortaklıkları kuruyoruz."),
             ("Her Segmentten Otel Seçeneği", "Geniş otel ağımız sayesinde her bütçeye uygun kaliteli konaklama alternatifleri sunuyoruz."),
-            ("Bütçeye Uygun Fiyatlar", "Anlaşmalı otellerimiz ile en uygun fiyat garantisi ve şeffaf fiyatlandırma politikası")] if T else
+            ("Bütçeye Uygun Fiyatlar", "Anlaşmalı otellerimiz ile kalem kalem, şeffaf ve yazılı teklif")] if T else
            [("Reliable Partnership", "We establish long-term partnerships with our healthcare sector-specific solutions"),
             ("Hotel Options from All Segments", "Thanks to our extensive hotel network, we offer quality accommodation alternatives suitable for every budget"),
-            ("Budget-Friendly Prices", "Best price guarantee and transparent pricing policy with our contracted hotels")])
+            ("Budget-Friendly Prices", "Itemised, transparent written quotes with our contracted hotels")])
     whyh = "".join(f'<li>{icon("check")}<div><h3>{e(t)}</h3><p>{e(d)}</p></div></li>' for t, d in why)
+    trust = ([("20+", "Yıllık sektör tecrübesi"), ("200+", "İstanbul'da anlaşmalı otel"), ("5,0 ★", "Google puanı"), ("Esenyurt", "TÜYAP'a yakın ofis")] if T else
+             [("20+", "Years of industry experience"), ("200+", "Partner hotels in Istanbul"), ("5.0 ★", "Google rating"), ("Esenyurt", "Office near TÜYAP")])
+    h += ('<section class="trust" aria-label="' + ("Öne çıkanlar" if T else "Highlights") + '"><ul>'
+          + "".join(f'<li><strong>{e(a)}</strong><span>{e(b)}</span></li>' for a, b in trust) + '</ul></section>\n')
     h += f"""<section class="section" id="kimler"><div class="wrap">
 <h2 class="center-h">{"Kimlere Hizmet Veriyoruz?" if T else "Who We Serve?"}</h2>
 <div class="who-grid">{whoh}</div>
@@ -592,6 +609,10 @@ def build_referans(lang):
     kinds = (["Özel Sağlık Kurumları", "Hastane Zincirleri", "Klinik Grupları", "Medikal Merkezler", "Sağlık Turizmi Firmaları", "Kurumsal Şirketler"] if T else
              ["Private Healthcare Institutions", "Hospital Chains", "Clinic Groups", "Medical Centers", "Health Tourism Companies", "Corporate Companies"])
     kh = "".join(f'<li>{icon("check")}{e(k)}</li>' for k in kinds)
+    priv = ("Kurumsal müşterilerimizin isimlerini ve çalışma koşullarını gizli tutuyoruz. Turizm sektöründeki 20 yılı aşkın tecrübemizle birçok kurumsal otel ile yerli ve yabancı kurum ve kuruluşa hizmet verdik; bu iş ilişkilerini ve ticari bilgileri üçüncü kişilerle paylaşmıyoruz." if T else
+            "We keep the names and working terms of our corporate clients confidential. With more than 20 years of experience in tourism, we have worked with many corporate hotels and with domestic and international institutions; we do not share these business relationships or commercial details with third parties.")
+    h += (f'<section class="section tight"><div class="wrap"><div class="biz" style="margin-top:0"><h3>{"Müşteri gizliliği" if T else "Client confidentiality"}</h3>'
+          f'<p>{e(priv)}</p></div></div></section>\n')
     h += f"""<section class="section"><div class="wrap">
 <h2 class="center-h">{"Google'da Müşterilerimiz Ne Diyor?" if T else "What Do Our Customers Say on Google?"}</h2>
 <p class="center-p rating-line"><strong>{GRATING[lang]}</strong></p>
@@ -1202,12 +1223,15 @@ ABOUT = {
         "h1": "Hakkımızda",
         "sub": "Sağlık kurumlarının konaklama ve seyahat ihtiyaçlarına profesyonel çözümler sunan güvenilir iş ortağınız.",
         "story_h": "Hikayemiz",
-        "p1": "Atlantis Travel, sağlık sektörünün dinamik yapısını ve kurumsal ihtiyaçları derinlemesine anlayarak yola çıktı. Özel klinik ve hastane gruplarının hasta, hasta yakını ve personel konaklama süreçlerinde yaşadığı operasyonel zorlukları çözmek için kurulduk. Bugün, Türkiye genelinde geniş otel ağımız ve profesyonel ekibimizle sağlık kurumlarının en güvenilir seyahat çözüm ortağıyız.",
-        "p2": "Yılların deneyimi ve sektörel uzmanlığımızla, her bütçeye uygun konaklama seçenekleri sunuyor, transfer organizasyonlarını kusursuz yönetiyor ve tüm operasyonel süreçleri kurumlarınız adına koordine ediyoruz. Hızlı, planlı ve sürdürülebilir hizmet anlayışımızla sağlık kurumlarının operasyonel yükünü azaltıyor, hasta memnuniyetini artırıyoruz.",
+        "p1": "Atlantis Travel, turizm sektöründe 20 yılı aşkın tecrübeye sahip bir ekip tarafından 2025 yılında İstanbul Esenyurt'ta kuruldu. Ekibimiz bu süre boyunca birçok kurumsal otel ile yerli ve yabancı kurum ve kuruluşa hizmet verdi.",
+        "p2": "Bugün özel hastane ve klinik grupları, sağlık turizmi firmaları, fuar katılımcıları ve şirketler için konaklama ve transfer operasyonunu üstleniyoruz. İstanbul genelinde 200'ü aşkın anlaşmalı otelle her bütçeye uygun seçenek sunuyor, konaklama boyunca süreci 7/24 takip ediyoruz. TÜYAP Fuar ve Kongre Merkezi'ne yakın ofisimizle fuar dönemlerinde ekip konaklamalarını yerinde yönetiyoruz. Her kuruma tek bir muhatap atıyor; fiyat, ödeme ve iptal koşullarını kurumun iş hacmine ve ihtiyacına göre özel olarak belirliyoruz.",
+        "biz_h": "Ticari bilgiler",
+        "biz": [("Ticari unvan", "Atlantis Travel – " + BIZ_OWNER), ("İşletme türü", "Şahıs işletmesi"), ("Kuruluş", "Mart 2025"),
+                ("Faaliyet", "Konaklama için aracılık hizmetleri"), ("Vergi dairesi", BIZ_TAX_OFFICE), ("Adres", BIZ_ADDR)],
         "pan_e": "Atlantis Travel", "pan_h": "Misyon ve değerlerimiz",
         "pan": [("Misyonumuz", "Sağlık kurumlarına bütçeye uygun, hızlı ve güvenilir konaklama çözümleri sunarak operasyonel süreçlerini kolaylaştırmak."),
                 ("Değerlerimiz", "Güvenilirlik, şeffaflık, profesyonellik ve müşteri odaklı hizmet anlayışı temel değerlerimizdir."),
-                ("Ekibimiz", "Deneyimli seyahat ve konaklama uzmanlarından oluşan ekibimiz, 7/24 kesintisiz hizmet sunmaktadır."),
+                ("Ekibimiz", "Turizm sektöründe 20 yılı aşkın tecrübeye sahip ekibimiz, 7/24 kesintisiz hizmet sunar."),
                 ("Kalite Odaklı", "Her segmentten otel seçeneği ve titizlikle seçilmiş iş ortaklarıyla en yüksek hizmet kalitesini garanti ediyoruz.")],
         "cta_h": "Kurumsal Seyahat Çözümleriniz İçin Bizimle İletişime Geçin",
         "cta_d": "Bütçenize uygun konaklama seçenekleri ve profesyonel operasyon yönetimi için ücretsiz danışmanlık alın.",
@@ -1219,12 +1243,15 @@ ABOUT = {
         "h1": "About Us",
         "sub": "Your trusted business partner providing professional solutions for the accommodation and travel needs of healthcare institutions.",
         "story_h": "Our Story",
-        "p1": "Atlantis Travel was founded with a deep understanding of the dynamic nature of the healthcare sector and corporate needs. We were established to solve the operational challenges experienced by private clinics and hospital groups in the accommodation processes of patients, patient relatives, and staff. Today, we are the most trusted travel solution partner for healthcare institutions with our extensive hotel network throughout Türkiye and professional team.",
-        "p2": "With years of experience and sectoral expertise, we offer accommodation options suitable for every budget, manage transfer organizations flawlessly, and coordinate all operational processes on behalf of your institutions. With our fast, planned, and sustainable service approach, we reduce the operational burden of healthcare institutions and increase patient satisfaction.",
+        "p1": "Atlantis Travel was founded in 2025 in Esenyurt, Istanbul, by a team with more than 20 years of experience in the tourism industry. Over the years our team has worked with many corporate hotels and with domestic and international institutions and organisations.",
+        "p2": "Today we run accommodation and transfer operations for private hospital and clinic groups, medical tourism companies, trade fair exhibitors and businesses. With more than 200 partner hotels across Istanbul we offer options for every budget and follow every stay 24/7. Our office near TÜYAP Fair and Congress Center lets us manage team accommodation on site during trade fairs. Every client gets a single point of contact, and pricing, payment and cancellation terms are set individually for each organisation.",
+        "biz_h": "Business details",
+        "biz": [("Trade name", "Atlantis Travel – " + BIZ_OWNER), ("Legal form", "Sole proprietorship"), ("Founded", "March 2025"),
+                ("Activity", "Accommodation booking services"), ("Tax office", BIZ_TAX_OFFICE), ("Address", BIZ_ADDR + ", Türkiye")],
         "pan_e": "Atlantis Travel", "pan_h": "Our mission and values",
         "pan": [("Our Mission", "To facilitate operational processes by providing budget-friendly, fast, and reliable accommodation solutions to healthcare institutions."),
                 ("Our Values", "Reliability, transparency, professionalism, and customer-focused service approach are our core values."),
-                ("Our Team", "Our team of experienced travel and accommodation specialists provides uninterrupted service 24/7."),
+                ("Our Team", "Our team, with more than 20 years of experience in tourism, provides uninterrupted 24/7 service."),
                 ("Quality Focused", "We guarantee the highest service quality with hotel options from every segment and carefully selected business partners.")],
         "cta_h": "Contact Us for Your Corporate Travel Solutions",
         "cta_d": "Get free consultation for accommodation options suitable for your budget and professional operation management.",
@@ -1241,7 +1268,8 @@ def build_about(lang):
     h += f"""<section class="section"><div class="wrap split">
 <div class="reveal"><p class="eyebrow">Atlantis Travel</p>
 <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);margin-bottom:18px">{e(A["story_h"])}</h2>
-<p class="lead" style="margin-bottom:16px">{e(A["p1"])}</p><p class="lead">{e(A["p2"])}</p></div>
+<p class="lead" style="margin-bottom:16px">{e(A["p1"])}</p><p class="lead">{e(A["p2"])}</p>
+<div class="biz"><h3>{e(A["biz_h"])}</h3><dl>{"".join(f'<dt>{e(k)}</dt><dd>{e(v)}</dd>' for k, v in A["biz"])}</dl></div></div>
 {panel(A["pan_e"], A["pan_h"], A["pan"])}
 </div></section>
 <section class="section white"><div class="wrap">
@@ -1272,7 +1300,7 @@ def build_contact(lang):
 <li>{icon("mail")}<div><small>{"E-posta" if T else "Email"}</small><a href="mailto:{EMAIL}">{EMAIL}</a><span class="note">{"Genellikle 24 saat içinde yanıt veririz" if T else "We typically respond within 24 hours"}</span></div></li>
 <li>{icon("wa")}<div><small>WhatsApp</small><a href="https://wa.me/{WA}" target="_blank" rel="noopener">{PHONE1}</a></div></li>
 <li>{icon("phone")}<div><small>{"Telefon" if T else "Phone"}</small><a href="tel:{PHONE1_RAW}">{PHONE1}</a> · <a href="tel:{PHONE2_RAW}">{PHONE2}</a></div></li>
-<li>{icon("pin")}<div><small>{"Adres" if T else "Address"}</small>{"İstanbul, Türkiye" if T else "Istanbul, Türkiye"}</div></li>
+<li>{icon("pin")}<div><small>{"Adres" if T else "Address"}</small>{e(BIZ_ADDR) if T else e(BIZ_ADDR + ", Türkiye")}</div></li>
 <li>{icon("ig")}<div><small>{"Bizi Takip Edin" if T else "Follow Us"}</small><a href="{INSTAGRAM}" target="_blank" rel="noopener">Instagram</a> · <a href="{FACEBOOK}" target="_blank" rel="noopener">Facebook</a></div></li>
 </ul>
 <div class="support-box"><h3>{"Desteğe İhtiyacınız mı Var?" if T else "Need Support?"}</h3>
@@ -1298,23 +1326,31 @@ def build_contact(lang):
 FAQ = {
     "tr": [
         ("Fiyat teklifleri nasıl alınır?", "İletişim sayfamızdan veya WhatsApp hattımızdan bizimle iletişime geçerek detaylı fiyat teklifi alabilirsiniz. Misafir sayısı, tarih ve bölge bilgilerini paylaştığınızda en uygun fiyatları size sunuyoruz."),
-        ("İptal politikanız nedir?", "İptal koşulları otel ve tarihe göre değişir, teklifinizde ayrıca belirtilir."),
+        ("İptal politikanız nedir?", "İptal ve değişiklik koşullarını her kurum için iş hacmine ve otel koşullarına göre özel olarak belirliyoruz. Geçerli koşullar teklifinizde yazılı olarak yer alır."),
         ("Transfer hizmetleri nasıl çalışır?", "Havalimanı, otogar veya istasyon karşılama hizmetleri sunuyoruz. Profesyonel sürücülerimiz ve konforlu araçlarımızla misafirlerinizin güvenli transferini sağlıyoruz. Grup büyüklüğüne göre sedan, minibüs veya otobüs seçenekleri mevcuttur."),
         ("Toplu rezervasyonlarda indirim var mı?", "Evet, toplu rezervasyonlarda özel indirimler sunuyoruz. Misafir sayısı ve konaklama süresine göre avantajlı fiyatlar için bizimle iletişime geçebilirsiniz."),
-        ("Ödeme nasıl yapılır?", "Ödeme koşulları, teklifimizle birlikte size özel olarak bildirilir."),
+        ("Ödeme nasıl yapılır?", "Ödeme koşullarını her kurum için iş hacmine ve ihtiyaçlarına göre özel olarak belirliyoruz. Koşullar teklifle birlikte yazılı olarak iletilir."),
         ("Acil durumlarda nasıl ulaşabilirim?", "7/24 destek hattımız ve WhatsApp iletişim hattımız üzerinden her zaman bize ulaşabilirsiniz. Acil durumlarda anında çözüm üretiyoruz."),
         ("Fuar konaklama hizmetiniz nedir?", "Fuar dönemlerinde yoğun talep gören bölgelerde özel konaklama paketleri sunuyoruz. Fuar takvimini takip ederek erken rezervasyon avantajları sağlıyoruz."),
         ("Uçak bileti veya vize hizmeti veriyor musunuz?", "Hayır. Hizmetlerimiz İstanbul'da otel konaklama, transfer ve operasyon organizasyonu ile sınırlıdır."),
+        ("Teklif ne kadar sürede gelir?", "Talebiniz ekibimize anında ulaşır. Tarih, kişi/oda sayısı ve tercih ettiğiniz bölgeyi paylaştığınızda yazılı teklifi en kısa sürede iletiriz. Acil talepler için WhatsApp hattımızı kullanabilirsiniz."),
+        ("Faturayı kim düzenliyor?", f"Faturayı Atlantis Travel ({BIZ_OWNER} – {BIZ_TAX_OFFICE} Vergi Dairesi) düzenler. Fatura ve ödeme koşulları teklifte yazılı olarak belirtilir."),
+        ("Ofisiniz nerede?", f"{BIZ_ADDR}. Ofisimiz TÜYAP Fuar ve Kongre Merkezi'ne yakındır; hizmet bölgemiz İstanbul'un tamamıdır."),
+        ("Teklif için kimlik veya sağlık bilgisi paylaşmam gerekir mi?", "Hayır. Teklif aşamasında yalnızca tarih, kişi/oda sayısı ve bölge bilgisi yeterlidir. Rezervasyon için gereken misafir bilgileri onay sonrasında ayrıca istenir."),
     ],
     "en": [
         ("How do I get price quotes?", "You can get a detailed price quote by contacting us through our contact page or WhatsApp line. When you share the number of guests, date, and region information, we offer you the most suitable prices."),
-        ("What is your cancellation policy?", "Cancellation conditions vary depending on the hotel and date, and are specified separately in your quote."),
+        ("What is your cancellation policy?", "Cancellation and change terms are set individually for each organisation, based on business volume and hotel conditions. The applicable terms are stated in writing in your quote."),
         ("How do transfer services work?", "We offer airport, bus station, or train station pickup services. We ensure safe transfer of your guests with our professional drivers and comfortable vehicles. Sedan, minibus, or bus options are available depending on group size."),
         ("Are there discounts for group reservations?", "Yes, we offer special discounts for group reservations. You can contact us for advantageous prices based on the number of guests and accommodation duration."),
-        ("How is payment made?", "Payment terms are communicated to you specifically with our quote."),
+        ("How is payment made?", "Payment terms are set individually for each organisation, based on business volume and needs. They are sent in writing together with your quote."),
         ("How can I reach you in emergencies?", "You can always reach us through our 24/7 support line and WhatsApp communication line. We provide immediate solutions in emergency situations."),
         ("What is your fair accommodation service?", "We offer special accommodation packages in regions with high demand during fair periods. We provide early reservation advantages by following the fair calendar."),
         ("Do you provide flight tickets or visa services?", "No. Our services cover hotel accommodation, transfers and operations in Istanbul."),
+        ("How quickly will I receive a quote?", "Your request reaches our team immediately. Once you share dates, number of guests/rooms and preferred area, we send a written quote as soon as possible. For urgent requests, please use WhatsApp."),
+        ("Who issues the invoice?", f"Invoices are issued by Atlantis Travel ({BIZ_OWNER} – {BIZ_TAX_OFFICE} Tax Office). Invoicing and payment terms are stated in writing in your quote."),
+        ("Where is your office?", f"{BIZ_ADDR}, Türkiye. Our office is close to TÜYAP Fair and Congress Center; we serve all of Istanbul."),
+        ("Do I need to share ID or medical information for a quote?", "No. Dates, number of guests/rooms and the area are enough for a quote. Guest details needed for the booking are requested separately after confirmation."),
     ],
 }
 
@@ -1359,7 +1395,7 @@ def build_privacy(lang):
 <ul><li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li><li>Kişisel verileriniz işlenmişse buna ilişkin bilgi talep etme</li><li>Kişisel verilerin işlenme amacını ve bunların amacına uygun kullanılıp kullanılmadığını öğrenme</li><li>Yurt içinde veya yurt dışında kişisel verilerin aktarıldığı üçüncü kişileri bilme</li><li>Kişisel verilerin eksik veya yanlış işlenmiş olması hâlinde bunların düzeltilmesini isteme</li><li>KVKK'da öngörülen şartlar çerçevesinde kişisel verilerin silinmesini veya yok edilmesini isteme</li><li>Düzeltme, silme veya yok edilme taleplerinin kişisel verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme</li><li>İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li></ul>
 <h2>Kişisel Verilerin Paylaşımı</h2><p>Kişisel verileriniz üçüncü kişilere satılmamaktadır. Ancak, size hizmet sunabilmek için gerekli olduğunda (örneğin otel rezervasyonu veya transfer organizasyonu için) anlaşmalı otel ve transfer firmalarıyla paylaşılabilir. Bu paylaşım yalnızca hizmetin yerine getirilmesi amacıyla ve gerekli güvenlik önlemleri alınarak yapılmaktadır.</p>
 <h2>Saklama</h2><p>Form verileri web sitesinde veritabanına kaydedilmez; yalnızca şirket e-posta adresimize iletilir. E-posta yazışmaları talebin gerektirdiği süre ve yasal saklama süreleri boyunca tutulur.</p>
-<h2>Çerezler</h2><p>Site, çalışması için gerekli olan tercih kaydını (çerez onayınız) tarayıcınızda saklar. Google Analytics yalnızca çerez bildiriminde "Kabul et" seçeneğini işaretlemeniz halinde yüklenir ve ziyaret istatistikleri için kullanılır. Tercihinizi altbilgideki "Çerez tercihleri" bağlantısından değiştirebilirsiniz.</p>
+<h2>Çerezler</h2><p>Site, çalışması için gerekli olan tercih kaydını (çerez onayınız) tarayıcınızda saklar. Ziyaret istatistikleri için Google Analytics, Google'ın izin modu (Consent Mode) ile çalışır. Çerez bildiriminde "Kabul et" seçeneğini işaretlemezseniz cihazınıza analiz çerezi yazılmaz; yalnızca çerez kullanmayan ve sizi tanımlamayan anonim sayım sinyalleri (örneğin sayfa görüntüleme) Google'a gönderilir. "Kabul et" seçeneğini işaretlerseniz Google Analytics çerezleri ziyaret istatistikleri için kullanılır. Tercihinizi altbilgideki "Çerez tercihleri" bağlantısından değiştirebilirsiniz.</p>
 <h2>Güvenlik</h2><p>Site HTTPS ile sunulur; formlar kötüye kullanıma karşı korunur ve IP adresiniz saklanmaz (yalnızca kötüye kullanım sınırı için geçici, geri döndürülemez bir özet kullanılır).</p>
 <h2>İletişim</h2><p>KVKK kapsamındaki haklarınızı kullanmak veya kişisel verilerinizle ilgili sorularınız için bizimle iletişime geçebilirsiniz:</p><p>E-posta: {m}</p>"""
     else:
@@ -1373,7 +1409,7 @@ def build_privacy(lang):
 <ul><li>To learn whether your personal data is being processed</li><li>To request information if your personal data has been processed</li><li>To learn the purpose of processing personal data and whether they are used in accordance with their purpose</li><li>To know the third parties to whom personal data is transferred domestically or abroad</li><li>To request correction of personal data if it is incomplete or incorrectly processed</li><li>To request deletion or destruction of personal data within the framework of the conditions stipulated in the KVKK</li><li>To request notification of correction, deletion, or destruction requests to third parties to whom personal data has been transferred</li><li>To object to the emergence of a result against you through the analysis of processed data exclusively by automated systems</li></ul>
 <h2>Sharing of Personal Data</h2><p>Your personal data is not sold to third parties. However, when necessary to provide you with service (for example, for hotel reservations or transfer organization), it may be shared with contracted hotels and transfer companies. This sharing is done only for the purpose of fulfilling the service and with necessary security measures taken.</p>
 <h2>Storage</h2><p>Form data is not stored in a website database; it is sent only to our company email address. Correspondence is kept as long as the request requires and as required by law.</p>
-<h2>Cookies</h2><p>The site stores your cookie choice in your browser. Google Analytics is loaded only if you select "Accept" in the cookie notice. You can change your choice via "Cookie settings" in the footer.</p>
+<h2>Cookies</h2><p>The site stores your cookie choice in your browser. For visitor statistics, Google Analytics runs in Google's Consent Mode. If you do not select "Accept" in the cookie notice, no analytics cookies are stored on your device; only anonymous, cookieless measurement signals that do not identify you (such as page views) are sent to Google. If you select "Accept", Google Analytics cookies are used for visitor statistics. You can change your choice via "Cookie settings" in the footer.</p>
 <h2>Security</h2><p>The site is served over HTTPS; forms are protected against abuse and your IP address is not stored (only a temporary, irreversible hash is used for rate limiting).</p>
 <h2>Contact</h2><p>To exercise your rights under the KVKK or for questions about your personal data, you can contact us:</p><p>Email: {m}</p>"""
     h += f'<section class="section"><div class="wrap prose">{body}<p style="margin-top:28px"><em>{"Son güncelleme" if T else "Last updated"}: 07.11.2026</em></p></div></section>'
